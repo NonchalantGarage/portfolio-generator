@@ -1,26 +1,16 @@
-var message = "Hello Node!";
 
-var sum = 6 + 3;
+const fs = require("fs"); 
 
-console.log(message);
-console.log(sum);
+const generatePage = require('./src/page-template.js');
 
-var commandLineArgs = process.argv;
-console.log(commandLineArgs);
 
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-console.log(profileDataArgs)
+const profileDataArgs = process.argv.slice(2);
 
-const printProfileData = profileDataArr =>{
-    for (let i=0; i < profileDataArr.length; i+=1) {
-        console.log(profileDataArr[i]);
+const[fullName,github] = profileDataArgs;
 
-    }
-    console.log('================');
 
-    profileDataArr.forEach((profileItem)=> {
-        console.log(profileItem)
-    });
-};
 
-printProfileData(profileDataArgs);
+fs.writeFile('./index.html', generatePage(fullName,github),err => {
+    if (err) throw err;
+    console.log('Portfolio complete! Check out index.html to see the output!');
+});
