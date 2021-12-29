@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
 const { retry } = require('rxjs');
-const fs = require("fs"); 
 const generatePage = require('./src/page-template.js');
+const generateSite = require('./utils/generate-site');
+
+const {writeFile, copyFile} = require('./utils/generate-site');
 
 const promptUser = () => {
     return inquirer
@@ -160,6 +162,8 @@ promptUser()
       console.log(err);
   });
     
+
+
 
 //   // TODO: Include packages needed for this application
 // const fs = require('fs');
