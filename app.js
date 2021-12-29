@@ -144,9 +144,67 @@ const promptProject = portfolioData => {
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    const pageHTML = generatePage(portfolioData);
-    fs.writeFile('./index.html', pageHTML, err => {
-        if (err) throw new Error(err);
-        console.log('Page created! Check out index.html in this directory to see it!');
-    });
-});
+    return generatePage(portfolioData);
+  })
+  .then(pageHTML => {
+      return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+      console.log(writeFileResponse);
+      return copyFile();
+  })
+  .then(copyFileResponse => {
+      console.log(copyFileResponse);
+  })
+  .catch(err => {
+      console.log(err);
+  });
+    
+
+//   // TODO: Include packages needed for this application
+// const fs = require('fs');
+// const inquirer = require('inquirer');
+// const generateMarkdown = require('./utils/generateMarkdown');
+
+
+// const promptUser = () => {
+//     return inquirer`
+//     .prompt([
+//         {
+//             type: 'input',
+//             name: 'title',
+//             message: 'What is the title of your README.md?',
+//             validate: titleInput => {
+//                 if (titleInput) {
+//                     return true;
+//                 } else {
+//                     return console.log('Please enter a title');
+//                 }
+//         }
+//     }, 
+//         // what is the title of your project
+
+//         // Description 
+//         // ToC
+//         // Installation
+//         // Usage
+//         // License
+//         // Contributing
+//         // Tests 
+//         // Questions 
+//     ]);
+// };   
+// // TODO: Create an array of questions for user input
+// const questions = [
+    
+// ];
+
+// // TODO: Create a function to write README file
+// function writeToFile(fileName, data) {}
+
+// // TODO: Create a function to initialize app
+// function init() {}
+
+// // Function call to initialize app
+// init();
+// promptUser();
